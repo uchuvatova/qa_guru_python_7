@@ -1,5 +1,5 @@
 import os.path
-from utils import RESOURCES_PATH, PROJECT_ROOT_PATH
+from utils import RESOURCES_PATH
 import requests
 from selene import query
 from selene.support.shared import browser
