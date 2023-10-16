@@ -3,6 +3,7 @@ import zipfile
 import xlrd
 from openpyxl.reader.excel import load_workbook
 from pypdf import PdfReader
+
 from utils import ARCHIVE_PATH, TXT_PATH, PDF_PATH, XLS_PATH, XLSX_PATH
 
 def test_pdf(download_pdf):

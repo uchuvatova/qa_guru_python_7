@@ -3,6 +3,8 @@ import pytest
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from utils import TMP_PATH, RESOURCES_PATH
+
+
 import requests
 from selene import query
 from selene.support.shared import browser
