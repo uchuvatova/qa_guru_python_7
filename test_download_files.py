@@ -17,7 +17,7 @@ def test_download_pdf_file_with_selene_by_href():
         f.write(content)
     reader = PdfReader(os.path.join(RESOURCES_PATH, "sample.pdf"))
     number_of_pages = len(reader.pages)
-    print(number_of_pages)
+    assert number_of_pages ==1
     page = reader.pages[0]
     text = page.extract_text()
     assert "This is an example of a user fillable PDF form." in text
