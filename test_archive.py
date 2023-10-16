@@ -1,13 +1,9 @@
 import os
 import zipfile
-
 import xlrd
 from openpyxl.reader.excel import load_workbook
 from pypdf import PdfReader
-from xlrd import open_workbook
-
-from utils import ARCHIVE_PATH, TXT_PATH, PDF_PATH, XLS_PATH, XLSX_PATH, RESOURCES_PATH
-
+from utils import ARCHIVE_PATH, TXT_PATH, PDF_PATH, XLS_PATH, XLSX_PATH
 
 def test_pdf(download_pdf):
     pdf_size_real = os.path.getsize(PDF_PATH)
