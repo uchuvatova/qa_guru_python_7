@@ -38,8 +38,8 @@ def test_txt(download_txt):
         z.write(filename=TXT_PATH, arcname='sample.txt')
     with zipfile.ZipFile(file=ARCHIVE_PATH, mode='r') as z:
         txt_info_zip = z.getinfo('sample.txt')
-        txt_name_zip = txt_info.filename
-        txt_size_zip = txt_info.file_size
+        txt_name_zip = txt_info_zip.filename
+        txt_size_zip = txt_info_zip.file_size
         with z.open('sample.txt') as txt_zip:
             assert 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' in txt_zip.read().decode('utf-8')
     assert txt_name_zip == txt_name_real
