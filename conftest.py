@@ -2,9 +2,7 @@ import glob
 import pytest
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
-from utils import TMP_PATH, RESOURCES_PATH
-
-
+from utils import *
 import requests
 from selene import query
 from selene.support.shared import browser
@@ -15,16 +13,16 @@ options.add_argument("--remote-debugging-port=9222")
 driver = webdriver.Chrome(options=options)
 browser.config.driver = driver
 
+
 @pytest.fixture(scope='session', autouse=True)
 def browser_management():
     browser.config.base_url = 'https://filesamples.com/formats'
     browser.config.timeout = 2.0
     browser.config.window_width = 1900
     browser.config.window_heigth = 1200
-
     yield
-
     browser.quit()
+
 
 @pytest.fixture(scope='session', autouse=True)
 def folder_management():
@@ -32,21 +30,21 @@ def folder_management():
         os.mkdir('resources')
     if not os.path.exists(TMP_PATH):
         os.mkdir('tmp')
-
     yield
-
     files = glob.glob(os.path.join(RESOURCES_PATH, "*"))
     for f in files:
-       os.remove(f)
+        os.remove(f)
     os.remove(os.path.join(TMP_PATH, "test_archive.zip"))
 
-@pytest.fixture(scope='function', autouse=True)
+
+@pytest.fixture(scope='session', autouse=True)
 def download_pdf(folder_management):
     browser.open("/pdf")
     href = browser.element("[href='/samples/document/pdf/sample2.pdf']").get(query.attribute("href"))
     content = requests.get(href).content
     with open(os.path.join(RESOURCES_PATH, "sample.pdf"), 'wb') as f:
         f.write(content)
+
 
 @pytest.fixture(scope='session', autouse=True)
 def download_txt(folder_management):
@@ -55,6 +53,8 @@ def download_txt(folder_management):
     content = requests.get(href).content
     with open(os.path.join(RESOURCES_PATH, "sample.txt"), 'wb') as f:
         f.write(content)
+
+
 @pytest.fixture(scope='session', autouse=True)
 def download_xls(folder_management):
     browser.open("/xls")
@@ -62,6 +62,8 @@ def download_xls(folder_management):
     content = requests.get(href).content
     with open(os.path.join(RESOURCES_PATH, "sample.xls"), 'wb') as f:
         f.write(content)
+
+
 @pytest.fixture(scope='session', autouse=True)
 def download_xlsx(folder_management):
     browser.open("/xlsx")
@@ -69,5 +71,3 @@ def download_xlsx(folder_management):
     content = requests.get(href).content
     with open(os.path.join(RESOURCES_PATH, "sample.xlsx"), 'wb') as f:
         f.write(content)
-
-
