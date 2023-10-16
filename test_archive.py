@@ -29,6 +29,8 @@ def test_pdf(download_pdf):
 
 
 def test_txt(download_txt):
+    with open(TXT_PATH) as f:
+        txt_text_real = f.read()
     txt_size_real = os.path.getsize(TXT_PATH)
     txt_name_real = os.path.basename(TXT_PATH)
     with zipfile.ZipFile(file=ARCHIVE_PATH, mode='a') as z:
@@ -38,9 +40,10 @@ def test_txt(download_txt):
         txt_name_zip = txt_info_zip.filename
         txt_size_zip = txt_info_zip.file_size
         with z.open('sample.txt') as txt_zip:
-            assert 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' in txt_zip.read().decode('utf-8')
+            text_txt_zip = txt_zip.read().decode('utf-8')
     assert txt_name_zip == txt_name_real
     assert txt_size_zip == txt_size_real
+    assert txt_text_real == text_txt_zip
 
 def test_xls(download_xls):
     xls_file_real = xlrd.open_workbook(XLS_PATH)
