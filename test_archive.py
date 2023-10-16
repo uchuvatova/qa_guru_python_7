@@ -1,7 +1,7 @@
 import zipfile, os
 from utils import ARCHIVE_PATH, TXT_PATH, PDF_PATH, XLS_PATH, XLSX_PATH
 
-def test_pdf(folder_management):
+def test_pdf(download_pdf):
     pdf_size_real = os.path.getsize(PDF_PATH)
     pdf_name_real = os.path.basename(PDF_PATH)
     with zipfile.ZipFile(file=ARCHIVE_PATH, mode='a') as z:
@@ -13,7 +13,7 @@ def test_pdf(folder_management):
         assert pdf_name == pdf_name_real
         assert pdf_size == pdf_size_real
 
-def test_txt(folder_management):
+def test_txt(download_txt):
     txt_size_real = os.path.getsize(TXT_PATH)
     txt_name_real = os.path.basename(TXT_PATH)
     with zipfile.ZipFile(file=ARCHIVE_PATH, mode='a') as z:
@@ -27,7 +27,7 @@ def test_txt(folder_management):
     assert txt_name == txt_name_real
     assert txt_size == txt_size_real
 
-def test_xls(folder_management):
+def test_xls(download_xls):
     xls_size_real = os.path.getsize(XLS_PATH)
     xls_name_real = os.path.basename(XLS_PATH)
     with zipfile.ZipFile(file=ARCHIVE_PATH, mode='a') as z:
@@ -39,7 +39,7 @@ def test_xls(folder_management):
     assert xls_name == xls_name_real
     assert xls_size == xls_size_real
 
-def test_xlsx(folder_management):
+def test_xlsx(download_xlsx):
     xlsx_size_real = os.path.getsize(XLSX_PATH)
     xlsx_name_real = os.path.basename(XLSX_PATH)
     with zipfile.ZipFile(file=ARCHIVE_PATH, mode='a') as z:
