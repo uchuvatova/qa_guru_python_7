@@ -1,2 +1,5 @@
 pytest~=7.4.2
 selene>=2.0.0b4
+xlrd
+openpyxl
+pypdf
